@@ -173,22 +173,27 @@ Version      : 1.0
 
 .latest-post-area {
   background-color: #F5F5F5;
+  border-radius: 2rem;
 }
 
 .latest-post-area .blog-item-info {
   background: #FFFFFF;
+  border-radius: 2rem;
 }
 
 .all-post-area {
   background-color: #F5F5F5;
+  border-radius: 2rem;
 }
 
 .all-post-area .blog-item-info {
   background: #FFFFFF;
+  border-radius: 2rem;
 }
 
 .featured-category h6 {
   font-size: 20px;
+  border-radius: 2rem;
 }
 
 .featured-category-item {
@@ -197,6 +202,7 @@ Version      : 1.0
   background-position: center;
   background-repeat: no-repeat;
   padding: 20px;
+  border-radius: 2rem;
 }
 
 .featured-category-item a {
@@ -216,6 +222,7 @@ Version      : 1.0
 
 .all-tags {
   margin-top: 24px;
+  border-radius: 2rem;
 }
 
 .all-tags h6 {
@@ -231,6 +238,7 @@ Version      : 1.0
   color: #272343;
   -webkit-transition: 0.3s all linear;
   transition: 0.3s all linear;
+  border-radius: 2rem;
 }
 
 .all-tags-list a:hover {
@@ -388,6 +396,7 @@ Version      : 1.0
   }
   .all-tags-list li {
     margin-bottom: 10px;
+    border-radius: 2rem;
   }
   .banner-content-main h4 {
     font-size: 32px;
@@ -1431,6 +1440,7 @@ Version      : 1.0
   background-color: rgba(245, 245, 245, 0.5);
   -webkit-transition: 0.1s all linear;
   transition: 0.1s all linear;
+  border-radius: 2rem;
 }
 
 .post-feature:hover {
@@ -1644,12 +1654,14 @@ footer .copy-right p a:hover {
   }
   .blog-item-image {
     width: 100%;
+    border-radius: 2rem;
   }
   .blog-item-info {
     padding: 20px;
     max-width: 100%;
     position: static;
     margin-top: 0;
+    border-radius: 2rem;
   }
   .blog-item-info-release {
     margin-bottom: 10px;
@@ -1662,9 +1674,11 @@ footer .copy-right p a:hover {
   }
   .blog-item-sm .blog-item-image {
     width: 100%;
+    border-radius: 2rem;
   }
   .blog-item-sm .blog-item-image img {
     width: 100%;
+    border-radius: 2rem;
   }
   .blog-item-sm .blog-item-info h5 {
     font-size: 24px;
