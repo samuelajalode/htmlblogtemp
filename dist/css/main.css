@@ -4,6 +4,41 @@ body {
   font-family: 'PT Serif', serif;
 }
 
+.list {
+  border-radius: 20px;
+  background-color: #676e810c;
+  color: black;
+}
+
+.d-flex {
+  color: #272343;
+}
+
+.widget_title {
+  font-size: h6;
+}
+
+.recent_category_widget {
+  border-radius: 20px;
+  background-color: #676e810c;
+}
+
+.recent_post_image {
+  padding-left: 15px;
+}
+
+.container {
+  border-radius: 20px;
+}
+
+.blog-item-info {
+  border-radius: 20px;
+}
+
+.blog-item-image {
+  border-radius: 20px;
+}
+
 .fs-5 {
   font-size: 18px !important;
 }
@@ -150,7 +185,7 @@ a {
 
 /*
 * ----------------------------------------------------------------------------------------
-Author       : Zakir Soft
+Author       : 
 Template Name: Blogy HTML Template
 Version      : 1.0
 * ----------------------------------------------------------------------------------------
@@ -1760,5 +1795,8 @@ footer .copy-right p a:hover {
 
 .curved-images {
   border-radius: 10px;
+}
+.single_sidebar_widget post_category_widget {
+  background-color: #FB743E;
 }
 /*# sourceMappingURL=main.css.map */
