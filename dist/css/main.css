@@ -1799,4 +1799,64 @@ footer .copy-right p a:hover {
 .single_sidebar_widget post_category_widget {
   background-color: #FB743E;
 }
+
+/*dark mode toggle*/
+
+:root {
+  --primary-color: #333;
+  --background-color: #fff;
+}
+
+body {
+  color: var(--primary-color);
+  background-color: var(--background-color);
+  transition: background-color 0.3s, color 0.3s;
+}
+
+body.dark-mode {
+  --primary-color: #fff;
+  --background-color: #333;
+}
+
+#theme-toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  transition: background-color 0.3s;
+}
+
+#theme-toggle svg {
+  width: 20px;
+  height: 20px;
+  stroke: #333;
+  transition: stroke 0.3s;
+}
+
+#theme-toggle:active {
+  background-color: #333;
+}
+
+#theme-toggle:active #sun-icon {
+  display: none;
+}
+
+#theme-toggle:active #moon-icon {
+  display: block;
+  color: #fff;
+}
+
+#theme-toggle #moon-icon {
+  color: #333;
+}
+
+body.dark-mode #theme-toggle svg {
+  stroke: #fff;
+}
 /*# sourceMappingURL=main.css.map */
