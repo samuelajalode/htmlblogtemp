@@ -29,6 +29,7 @@
                     </svg> -->
                 </a>
                 <!-- Logo Ends Here -->
+                <!-- The modal -->
 
                 <!-- Mobile Menu Starts Here -->
                 <div class="menu-btn">
@@ -248,6 +249,19 @@
     
     <!-- Menu JS Link -->
     <script src="dist/js/menu.js"></script>
+    <script>
+  const modal = document.getElementById('myModal');
+  const openBtn = document.getElementById('openBtn');
+  const closeBtn = document.getElementById('closeBtn');
+
+  openBtn.onclick = () => modal.showModal(); // showModal() adds backdrop + centers it
+  closeBtn.onclick = () => modal.close();
+ 
+  // Click backdrop to close
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) modal.close();
+  });
+</script>
 </body>
 
 </html>
