@@ -18,8 +18,12 @@
 
     <!-- Theme CSS Link -->
     <link rel="stylesheet" href="dist/css/main.css">
+    <link rel="stylesheet" href="dist/css/style.css">
+
+
 
     <title>Blog-Home</title>
+
 </head>
 
 <body>
@@ -72,6 +76,7 @@
                         <li><a href="#" class="main-menu-item">Fashion</a></li>
                     </ul>
                     <form action="search.html">
+
                         <div class="header-searchbar"
                         style="border-radius: 2rem;"
                         >
@@ -82,11 +87,17 @@
                             </svg>
                         </div>
                     </form>
-                </div>
+
+                    <button class="open-btn" onclick="openModal()" href="partials/login-modal.html">Login</button>
+
+                    
+                    
+                    </div>
                 <!-- Menu Items Ends Here -->
             </div>
         </div>
     </header>
+    
     <!-- Header Ends Here -->
 
     <!-- Banner Starts Here -->
@@ -99,10 +110,10 @@
                         <div class="banner-content">
                             <div class="banner-content-main" style="border-radius: 2rem;">
                                 <span class="fs-6 has-line">Business</span>
-                                <h4><a href="details.html">From broke to financially stable, How to build wealth on a modest income</a></h4>
+                                <h4><a href="from-broke-to-finacially-stable.html">From broke to financially stable, How to build wealth on a modest income</a></h4>
                                 <div class="blog-date">
                                     <div class="blog-date-start">
-                                        <span>Jan 28, 2026</span>
+                                        <span>May 26, 2026</span>
                                     </div>
                                     <div class="blog-date-end">
                                         <span>5 min read</span>
@@ -543,7 +554,7 @@
                             <div class="blog-item blog-item-sm">
                                 <div class="blog-item-image">
                                     <a href="well-crafted-wdrbe.html">
-                                        <img src="dist/images/fundingstartups.jpg" alt="Image" class="blog-item-image">
+                                        <img src="dist/images/dressforsuccess.jpg" alt="Image" class="blog-item-image">
                                     </a>
                                 </div>
                                 <div class="blog-item-info">
@@ -568,11 +579,11 @@
                             <div class="blog-item blog-item-sm">
                                 <div class="blog-item-image">
                                     <a href="mastering-prsntatn-in-tech.html">
-                                        <img src="dist/images/dressforsuccess.jpg" alt="Image" class="blog-item-image">
+                                        <img src="dist/images/fundingstartups.jpg" alt="Image" class="blog-item-image">
                                     </a>
                                 </div>
                                 <div class="blog-item-info">
-                                    <span class="fs-6 has-line">Startup Funding, Entrepreneurship, Business Presentation</span>
+                                    <span class="fs-6 has-line">Startup Funding </span>
                                     <h5><a href="mastering-prsntatn-in-tech.html">Winning Over Investors, Mastering Business Presentations in Tech</a></h5>
                                     <div class="blog-item-info-release">
                                         <span>April 1, 2026</span> <span class="dot"></span> <span>4 min read</span>
@@ -902,6 +913,9 @@
 
     <!-- Custom JS Link -->
     <script src="dist/js/main.js"></script>
+    <script src="dist/js/modal.js"></script>
+    <script src="dist/js/modal-loader.js"></script>
+
 </body>
 
 </html>

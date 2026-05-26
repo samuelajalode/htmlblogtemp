@@ -1859,4 +1859,13 @@ body.dark-mode {
 body.dark-mode #theme-toggle svg {
   stroke: #fff;
 }
+
+.answer {
+  display: none;
+  padding: 10px;
+}
+
+.faq.active .answer {
+  display: block;
+}
 /*# sourceMappingURL=main.css.map */
