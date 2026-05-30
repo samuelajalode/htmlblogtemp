@@ -4,6 +4,14 @@ body {
   font-family: 'PT Serif', serif;
 }
 
+.single_sidebar_widget {
+  width: 50%;
+}
+
+.single_sidebar_widget {
+  float: right;
+}
+
 .list {
   border-radius: 20px;
   background-color: #676e810c;
