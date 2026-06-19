@@ -608,6 +608,7 @@ Version      : 1.0
   margin-right: 8px;
   -webkit-transition: 0.3s all linear;
   transition: 0.3s all linear;
+  border-radius: 20px;
 }
 
 .search-area-input input:focus {
@@ -644,10 +645,12 @@ Version      : 1.0
     width: 100%;
     margin-bottom: 15px;
   }
+  
   .search-area-input input {
     width: 100% !important;
     margin-right: 0;
     height: 60px;
+    border-radius: 20px;
   }
 }
 
@@ -1183,7 +1186,7 @@ Version      : 1.0
   padding: 0px 40px;
   background-color: #FB743E;
   color: white;
-  border-radius: 0px;
+  border-radius: 20px;
   font-family: "Poppins", sans-serif;
   font-weight: 500;
   font-size: 16px;
@@ -1383,6 +1386,7 @@ Version      : 1.0
   padding-left: 45px;
   -webkit-transition: 0.3s all linear;
   transition: 0.3s all linear;
+  border-radius: 20px;
 }
 
 .header .main-menu .header-searchbar input:focus {
@@ -1427,6 +1431,7 @@ Version      : 1.0
   max-width: 100%;
   -o-object-fit: cover;
      object-fit: cover;
+     border-radius: 2rem;
 }
 
 .blog-item-info {
@@ -1558,7 +1563,7 @@ footer .footer-wizard-form input {
   padding-left: 20px;
   border: 2px solid transparent;
   background-color: rgba(255, 255, 255, 0.2);
-  border-radius: 0px;
+  border-radius: 20px;
   color: white;
   font-family: "Poppins", sans-serif;
   width: 315px;

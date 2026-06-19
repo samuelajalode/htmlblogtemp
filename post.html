@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="dist/css/vendor/bootstrap.min.css">
+  <link rel="stylesheet" href="dist/css/main.css">
+  <title>Post</title>
+  <style>
+    .post-container{max-width:900px;margin:40px auto;padding:0 16px;font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial}
+    .post-title{font-size:2rem;margin-bottom:8px;line-height:1.15}
+    .post-meta{color:#666;margin-bottom:20px}
+    .loading{padding:40px;text-align:center;color:#666}
+    .error{padding:40px;text-align:center;color:#c0392b}
+    .author-box{display:flex;align-items:center;gap:12px;margin-bottom:18px}
+    .author-avatar{width:64px;height:64px;border-radius:50%;object-fit:cover;flex:0 0 64px}
+    .author-name{font-weight:600}
+    .post-body{font-size:1rem;line-height:1.8;color:#222}
+    @media (max-width:600px){.post-container{margin:20px 12px}.author-avatar{width:48px;height:48px;flex:0 0 48px}}
+  </style>
+</head>
+<body>
+  <header class="container mt-3">
+    <a href="index.html">← Back to Home</a>
+  </header>
+
+  <main class="post-container">
+    <div id="loading" class="loading">Loading post…</div>
+    <article id="post" style="display:none">
+      <h1 id="title" class="post-title"></h1>
+      <div id="authorBox" class="author-box" style="display:none">
+        <img id="authorAvatar" src="" alt="author" class="author-avatar">
+        <div>
+          <div id="authorName" class="author-name"></div>
+          <div id="meta" class="post-meta"></div>
+        </div>
+      </div>
+      <div id="body" class="post-body"></div>
+    </article>
+    <div id="error" class="error" style="display:none">Could not load post.</div>
+  </main>
+
+  <script>
+    const API_BASE = 'https://jsonplaceholder.typicode.com';
+    function qs(name){
+      const params = new URLSearchParams(window.location.search);
+      return params.get(name);
+    }
+
+    function fmtDateFromId(id){
+      const d = new Date(); d.setDate(d.getDate() - (id % 30));
+      return d.toLocaleDateString('en-US', {month:'short', day:'numeric', year:'numeric'});
+    }
+
+    async function fetchJson(url){
+      const r = await fetch(url);
+      if(!r.ok) throw new Error('fetch failed');
+      return r.json();
+    }
+
+    async function loadPost(){
+      const postId = qs('postId');
+      const loading = document.getElementById('loading');
+      const postEl = document.getElementById('post');
+      const errorEl = document.getElementById('error');
+      if(!postId){ loading.style.display='none'; errorEl.style.display='block'; errorEl.textContent='No postId provided in URL.'; return; }
+
+      try{
+        const post = await fetchJson(`${API_BASE}/posts/${encodeURIComponent(postId)}`);
+        // fetch author + avatar
+        let authorName = 'Unknown';
+        let avatarUrl = 'dist/images/cowner.png';
+        try{
+          const user = await fetchJson(`${API_BASE}/users/${post.userId}`);
+          authorName = user.name || authorName;
+          // use pravatar for a quick avatar based on user id
+          avatarUrl = `https://i.pravatar.cc/150?img=${post.userId}`;
+        }catch(e){}
+
+        document.getElementById('title').textContent = post.title;
+        document.getElementById('authorName').textContent = authorName;
+        document.getElementById('meta').textContent = `${fmtDateFromId(post.id)} • ${ (post.id%10)+3 } min read`;
+        document.getElementById('authorAvatar').src = avatarUrl;
+        document.getElementById('authorBox').style.display = 'flex';
+
+        // simple body paragraphing
+        const bodyHtml = post.body.split('\n').map(p=>`<p>${p}</p>`).join('');
+        document.getElementById('body').innerHTML = bodyHtml;
+
+        loading.style.display='none';
+        postEl.style.display='block';
+      }catch(err){
+        loading.style.display='none';
+        errorEl.style.display='block';
+        errorEl.textContent = 'Error loading post.';
+        console.error(err);
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', loadPost);
+  </script>
+
+</body>
+</html>

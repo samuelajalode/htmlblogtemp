@@ -910,7 +910,117 @@
     <script src="dist/js/main.js"></script>
     <script src="dist/js/modal.js"></script>
     <script src="dist/js/modal-loader.js"></script>
+<script>
+// Lightweight client script using jsonplaceholder.typicode.com as a free blog API
+const API_BASE = 'https://jsonplaceholder.typicode.com';
 
+const fmtDate = (id)=>{
+    // create a pseudo date based on id for display
+    const d = new Date();
+    d.setDate(d.getDate() - (id % 30));
+    return d.toLocaleDateString('en-US', {month:'short', day:'numeric', year:'numeric'});
+}
+
+function renderPostCard(post){
+    const image = `https://picsum.photos/seed/post${post.id}/600/400`;
+    const category = 'General';
+    const link = `post.html?postId=${post.id}`;
+    const title = post.title || 'Untitled';
+    return `
+        <div class="col-lg-4 col-md-6 mb-4">
+            <div class="blog-item blog-item-sm" style="border-radius: 2rem;">
+                <div class="blog-item-image" style="border-radius: 2rem;">
+                    <a href="${link}" style="border-radius: 2rem;">
+                        <img src="${image}" alt="${title}" style="border-radius: 2rem;">
+                    </a>
+                </div><br>
+                <div class="blog-item-info" style="border-radius: 2rem;">
+                    <span class="fs-6 has-line">${category}</span>
+                    <h5><a href="${link}">${title}</a></h5>
+                    <div class="blog-item-info-release">
+                        <span>${fmtDate(post.id)}</span> <span class="dot"></span> <span>${(post.id%10)+3} min read</span>
+                    </div>
+                    <a href="${link}" class="btn btn-link">Read Article
+                        <svg width="18" height="12" viewBox="0 0 18 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12.5 1.5L17 6M17 6L12.5 10.5M17 6H1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+async function getPosts(start=0, limit=6){
+    const res = await fetch(`${API_BASE}/posts?_start=${start}&_limit=${limit}`);
+    if(!res.ok) return [];
+    return res.json();
+}
+
+document.addEventListener('DOMContentLoaded', async () => {
+    try{
+        // Recent Posts (first 3)
+        const recent = await getPosts(0,3);
+        const recentSection = [...document.querySelectorAll('h4.heading')].find(h=>h.textContent.includes('Recent Post'))?.closest('section');
+        if(recentSection){
+            const rows = recentSection.querySelectorAll('.row');
+            if(rows[1]) rows[1].remove();
+            recentSection.querySelector('.container')?.insertAdjacentHTML('beforeend', `<div class="row">${recent.map(renderPostCard).join('')}</div>`);
+        }
+
+        // Latest Posts (next 6)
+        const latest = await getPosts(3,6);
+        const latestSection = document.querySelector('.latest-post-area');
+        if(latestSection){
+            const rows = latestSection.querySelectorAll('.row');
+            if(rows[1]) rows[1].remove();
+            latestSection.querySelector('.container')?.insertAdjacentHTML('beforeend', `<div class="row">${latest.map(renderPostCard).join('')}</div>`);
+        }
+
+        // Featured Posts (use next 2 as featured)
+        const featured = await getPosts(9,2);
+        const featuredSections = [...document.querySelectorAll('.section-padding')].filter(s=> s.querySelector('h4.heading') && s.querySelector('h4.heading').textContent.includes('Featured Post'));
+        if(featuredSections[0]){
+            const sec = featuredSections[0];
+            const rows = sec.querySelectorAll('.row');
+            if(rows[1]) rows[1].remove();
+            sec.querySelector('.container')?.insertAdjacentHTML('beforeend', `<div class="row">${featured.map(p=> renderPostCard(p).replace('col-lg-4','col-lg-6')).join('')}</div>`);
+        }
+
+        // All Posts (grid) - first 6
+        const all = await getPosts(0,6);
+        const allSection = document.querySelector('.all-post-area');
+        if(allSection){
+            const leftCol = allSection.querySelector('.col-lg-8');
+            const innerRow = leftCol.querySelector('.row');
+            if(innerRow) innerRow.remove();
+            leftCol.insertAdjacentHTML('afterbegin', `<div class="row">${all.map(renderPostCard).join('')}</div>`);
+        }
+
+        // Populate simple sidebar recent lists using first 4 posts
+        const sidebarRecent = await getPosts(0,4);
+        const recentWidgets = [...document.querySelectorAll('.single_sidebar_widget.recent_category_widget')];
+        if(recentWidgets.length){
+            const widget = recentWidgets[0];
+                widget.innerHTML = sidebarRecent.map(p=>{
+                    const avatar = `https://i.pravatar.cc/48?img=${p.userId}`;
+                    return `
+                    <div class="media post_item" style="display:flex;align-items:flex-start;gap:10px;margin-bottom:12px">
+                        <img src="${avatar}" alt="author" style="width:48px;height:48px;border-radius:50%;object-fit:cover">
+                        <div style="flex:1">
+                            <a href="post.html?postId=${p.id}" style="font-weight:600;color:inherit"><h7 style="margin:0">${p.title}</h7></a>
+                            <p class="recent_post_image" style="margin:6px 0 0;color:#666;font-size:0.9rem">${fmtDate(p.id)}</p>
+                        </div>
+                    </div>
+                    `
+                }).join('');
+        }
+
+    }catch(e){
+        console.error('Error fetching posts', e);
+    }
+});
+</script>
 </body>
 
 </html>
